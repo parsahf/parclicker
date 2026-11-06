@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ParClicker</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+        }
+
+
+        header {
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            direction: rtl;
+        }
+
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            direction: ltr;
+        }
+
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+
+        nav a:hover {
+            color: white;
+        }
+
+
+        .user-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .username {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+
+        .logout {
+            background: #dc2626;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+
+        .logout:hover {
+            background: #b91c1c;
+        }
+
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 40px;
+        }
+
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+            direction: ltr;
+        }
+
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 20px;
+        }
+
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+        }
+
+
+        .card {
+            width: 370px;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 18px;
+        }
+
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            background: white;
+            color: #111827;
+        }
+
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+
+        button:disabled {
+            background: #475569;
+            cursor: not-allowed;
+        }
+
+
+        .result {
+            margin-top: 18px;
+            line-height: 1.9;
+            min-height: 25px;
+        }
+
+
+        .warning {
+            background: #422006;
+            color: #fbbf24;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+
+        .info {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+
+        .price-box {
+            background: #0f172a;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 20px 0;
+            line-height: 2;
+        }
+
+
+        .final-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+
+
+        .discount {
+            color: #4ade80;
+        }
+
+
+        .plan-info {
+            margin-top: 15px;
+            padding: 14px;
+            background: #172033;
+            border-radius: 10px;
+            color: #cbd5e1;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+
+        .id-info {
+            background: #172033;
+            padding: 14px;
+            border-radius: 10px;
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+
+        .dashboard-button {
+            background: #334155;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+
+        .dashboard-button:hover {
+            background: #475569;
+        }
+
+
+        .success {
+            color: #4ade80;
+        }
+
+
+        .error {
+            color: #f87171;
+        }
+
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            padding: 60px 20px;
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            ParClicker
+        </div>
+
+
+        <nav>
+
+            <a href="#pricing">
+                قیمت‌ها
+            </a>
+
+
+            <a
+                href="/dashboard"
+                class="dashboard-button"
+            >
+                داشبورد
+            </a>
+
+
+            <div
+                class="user-box"
+                id="user-box"
+            >
+
+                <span
+                    class="username"
+                    id="username"
+                >
+                    در حال بررسی...
+                </span>
+
+
+                <a
+                    href="/logout"
+                    class="logout"
+                >
+                    خروج
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>
+            ParClicker
+        </h1>
+
+
+        <p>
+            یک اتوکلیکر سریع و ساده
+        </p>
+
+    </section>
+
+
+
+    <!-- PRICING -->
+
+    <section class="cards">
+
+
+        <div
+            class="card"
+            id="pricing"
+        >
+
+            <h2>
+                💰 خرید اشتراک
+            </h2>
+
+
+            <!-- SOFTWARE ID -->
+
+            <div class="info">
+                ID نرم‌افزار
+            </div>
+
+
+            <input
+                type="text"
+                id="software-id"
+                placeholder="مثلاً PC-8A21F4C93B17"
+                autocomplete="off"
+            >
+
+
+            <div class="id-info">
+
+                💡 ابتدا ParClicker را روی کامپیوتر
+                خود اجرا کنید و ID نمایش‌داده‌شده
+                داخل نرم‌افزار را در این قسمت وارد کنید.
+
+                <br>
+
+                اشتراک شما به این ID متصل خواهد شد.
+
+            </div>
+
+
+
+            <!-- CPS -->
+
+            <div class="info">
+
+                سرعت کلیک
+                (CPS - Clicks Per Second)
+
+            </div>
+
+
+            <input
+                type="number"
+                id="cps"
+                placeholder="مثلاً 50"
+                min="1"
+                max="1000"
+                oninput="calculatePrice()"
+            >
+
+
+            <div class="info">
+
+                سرعت انتخاب‌شده:
+
+                <strong>
+
+                    <span id="cps-display">
+                        ۰
+                    </span>
+
+                    کلیک در ثانیه
+
+                </strong>
+
+            </div>
+
+
+
+            <div class="warning">
+
+                ⚠️ توجه:
+
+                ممکن است کامپیوتر شما توانایی
+                اجرای این مقدار کلیک در ثانیه را
+                نداشته باشد.
+
+                عملکرد واقعی به سخت‌افزار و شرایط
+                سیستم شما بستگی دارد.
+
+            </div>
+
+
+
+            <!-- MONTHS -->
+
+            <div class="info">
+                مدت اشتراک
+            </div>
+
+
+            <select
+                id="months"
+                onchange="calculatePrice()"
+            >
+
+                <option value="1">۱ ماه</option>
+                <option value="2">۲ ماه</option>
+                <option value="3">۳ ماه</option>
+                <option value="4">۴ ماه</option>
+                <option value="5">۵ ماه</option>
+                <option value="6">۶ ماه</option>
+                <option value="7">۷ ماه</option>
+                <option value="8">۸ ماه</option>
+                <option value="9">۹ ماه</option>
+                <option value="10">۱۰ ماه</option>
+                <option value="11">۱۱ ماه</option>
+                <option value="12">۱۲ ماه</option>
+
+            </select>
+
+
+
+            <div class="plan-info">
+
+                💡 قیمت بر اساس سرعت کلیک و مدت
+                اشتراک محاسبه می‌شود.
+
+            </div>
+
+
+
+            <!-- PRICE -->
+
+            <div class="price-box">
+
+                <div>
+
+                    قیمت پایه:
+
+                    <span id="base-price">
+                        ۰
+                    </span>
+
+                    تومان
+
+                </div>
+
+
+                <div class="discount">
+
+                    تخفیف:
+
+                    <span id="discount">
+                        ۰
+                    </span>
+
+                    تومان
+
+                </div>
+
+
+                <div>
+                    قیمت نهایی:
+                </div>
+
+
+                <div class="final-price">
+
+                    <span id="final-price">
+                        ۰
+                    </span>
+
+                    تومان
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                id="buy-button"
+                onclick="buyNow()"
+            >
+                خرید اشتراک
+            </button>
+
+
+            <div
+                class="result"
+                id="buy-result"
+            ></div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        ParClicker © 2026
+
+    </footer>
+
+
+
+    <script>
+
+
+        // =========================
+        // CHECK LOGIN
+        // =========================
+
+        async function checkLogin() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/me",
+                        {
+                            credentials: "include"
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!data.logged_in) {
+
+                    window.location.href =
+                        "/login-page";
+
+                    return;
+                }
+
+
+                document.getElementById(
+                    "username"
+                ).innerText =
+                    "👤 " + data.username;
+
+
+            } catch (error) {
+
+                window.location.href =
+                    "/login-page";
+
+            }
+
+        }
+
+
+        checkLogin();
+
+
+
+        // =========================
+        // PRICE CALCULATOR
+        // =========================
+
+        function calculatePrice() {
+
+            const cps =
+                Number(
+                    document.getElementById(
+                        "cps"
+                    ).value
+                );
+
+
+            const months =
+                Number(
+                    document.getElementById(
+                        "months"
+                    ).value
+                );
+
+
+            const cpsDisplay =
+                document.getElementById(
+                    "cps-display"
+                );
+
+
+            const basePrice =
+                document.getElementById(
+                    "base-price"
+                );
+
+
+            const discount =
+                document.getElementById(
+                    "discount"
+                );
+
+
+            const finalPrice =
+                document.getElementById(
+                    "final-price"
+                );
+
+
+            if (
+                !cps ||
+                cps < 1 ||
+                cps > 1000
+            ) {
+
+                cpsDisplay.innerText = "۰";
+
+                basePrice.innerText = "۰";
+
+                discount.innerText = "۰";
+
+                finalPrice.innerText = "۰";
+
+                return;
+
+            }
+
+
+            const base =
+                cps * 2000 * months;
+
+
+            const discountRate =
+                (months - 1) / 66;
+
+
+            const discountAmount =
+                Math.round(
+                    base * discountRate
+                );
+
+
+            const final =
+                base - discountAmount;
+
+
+            cpsDisplay.innerText =
+                cps.toLocaleString("fa-IR");
+
+
+            basePrice.innerText =
+                base.toLocaleString("fa-IR");
+
+
+            discount.innerText =
+                discountAmount.toLocaleString("fa-IR");
+
+
+            finalPrice.innerText =
+                final.toLocaleString("fa-IR");
+
+        }
+
+
+
+        // =========================
+        // REGISTER SOFTWARE ID
+        // =========================
+
+        async function registerSoftwareID(softwareId) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/software/register",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            credentials: "include",
+
+                            body: JSON.stringify({
+                                software_id: softwareId
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                return data;
+
+
+            } catch (error) {
+
+                return {
+                    success: false,
+                    message: "خطا در ارتباط با سرور."
+                };
+
+            }
+
+        }
+
+
+
+        // =========================
+        // CREATE ORDER
+        // =========================
+
+        async function createOrder(
+            softwareId,
+            cps,
+            months
+        ) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/order/create",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            credentials: "include",
+
+                            body: JSON.stringify({
+
+                                software_id:
+                                    softwareId,
+
+                                cps:
+                                    cps,
+
+                                months:
+                                    months
+
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                return data;
+
+
+            } catch (error) {
+
+                return {
+
+                    success: false,
+
+                    message:
+                        "خطا در ارتباط با سرور."
+
+                };
+
+            }
+
+        }
+
+
+
+        // =========================
+        // BUY
+        // =========================
+
+        async function buyNow() {
+
+            const softwareId =
+                document.getElementById(
+                    "software-id"
+                ).value.trim();
+
+
+            const cps =
+                Number(
+                    document.getElementById(
+                        "cps"
+                    ).value
+                );
+
+
+            const months =
+                Number(
+                    document.getElementById(
+                        "months"
+                    ).value
+                );
+
+
+            const result =
+                document.getElementById(
+                    "buy-result"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "buy-button"
+                );
+
+
+            // =========================
+            // CHECK ID
+            // =========================
+
+            if (!softwareId) {
+
+                result.className =
+                    "result error";
+
+                result.innerHTML =
+                    "❌ لطفاً ID نرم‌افزار خود را وارد کنید.";
+
+                return;
+
+            }
+
+
+            // =========================
+            // CHECK CPS
+            // =========================
+
+            if (
+                !cps ||
+                cps < 1 ||
+                cps > 1000
+            ) {
+
+                result.className =
+                    "result error";
+
+                result.innerHTML =
+                    "❌ لطفاً سرعتی بین 1 تا 1000 CPS وارد کنید.";
+
+                return;
+
+            }
+
+
+            // =========================
+            // CHECK MONTHS
+            // =========================
+
+            if (
+                !months ||
+                months < 1 ||
+                months > 12
+            ) {
+
+                result.className =
+                    "result error";
+
+                result.innerHTML =
+                    "❌ مدت اشتراک نامعتبر است.";
+
+                return;
+
+            }
+
+
+            // =========================
+            // DISABLE BUTTON
+            // =========================
+
+            button.disabled = true;
+
+            button.innerText =
+                "در حال ایجاد سفارش...";
+
+
+            result.className =
+                "result";
+
+            result.innerHTML =
+                "⏳ در حال اتصال ID به حساب شما...";
+
+
+            // =========================
+            // REGISTER ID
+            // =========================
+
+            const idResult =
+                await registerSoftwareID(
+                    softwareId
+                );
+
+
+            if (!idResult.success) {
+
+                button.disabled = false;
+
+                button.innerText =
+                    "خرید اشتراک";
+
+                result.className =
+                    "result error";
+
+                result.innerHTML =
+                    "❌ " +
+                    (
+                        idResult.message ||
+                        "این ID قابل استفاده نیست."
+                    );
+
+                return;
+
+            }
+
+
+            // =========================
+            // CREATE ORDER
+            // =========================
+
+            result.innerHTML =
+                "⏳ در حال ایجاد سفارش...";
+
+
+            const orderResult =
+                await createOrder(
+                    softwareId,
+                    cps,
+                    months
+                );
+
+
+            // =========================
+            // ORDER ERROR
+            // =========================
+
+            if (!orderResult.success) {
+
+                button.disabled = false;
+
+                button.innerText =
+                    "خرید اشتراک";
+
+                result.className =
+                    "result error";
+
+                result.innerHTML =
+                    "❌ " +
+                    (
+                        orderResult.message ||
+                        "خطا در ایجاد سفارش."
+                    );
+
+                return;
+
+            }
+
+
+            // =========================
+            // SERVER PRICE
+            // =========================
+
+            const serverPrice =
+                Number(
+                    orderResult.price
+                );
+
+
+            const serverBasePrice =
+                Number(
+                    orderResult.base_price
+                );
+
+
+            const serverDiscount =
+                Number(
+                    orderResult.discount_amount
+                );
+
+
+            // =========================
+            // UPDATE PRICE BOX
+            // =========================
+
+            document.getElementById(
+                "base-price"
+            ).innerText =
+                serverBasePrice.toLocaleString(
+                    "fa-IR"
+                );
+
+
+            document.getElementById(
+                "discount"
+            ).innerText =
+                serverDiscount.toLocaleString(
+                    "fa-IR"
+                );
+
+
+            document.getElementById(
+                "final-price"
+            ).innerText =
+                serverPrice.toLocaleString(
+                    "fa-IR"
+                );
+
+
+            // =========================
+            // SUCCESS
+            // =========================
+
+            button.disabled = false;
+
+            button.innerText =
+                "خرید اشتراک";
+
+
+            result.className =
+                "result success";
+
+
+            result.innerHTML = `
+
+                ✅ سفارش با موفقیت ایجاد شد.
+
+                <br><br>
+
+                🧾 شماره سفارش:
+
+                ${orderResult.order_id}
+
+                <br>
+
+                🖥️ ID نرم‌افزار:
+
+                ${escapeHtml(
+                    orderResult.software_id
+                )}
+
+                <br>
+
+                🛒 سرعت:
+
+                ${Number(
+                    orderResult.cps
+                ).toLocaleString("fa-IR")}
+
+                CPS
+
+                <br>
+
+                📅 مدت:
+
+                ${Number(
+                    orderResult.months
+                ).toLocaleString("fa-IR")}
+
+                ماه
+
+                <br>
+
+                💰 مبلغ:
+
+                ${serverPrice.toLocaleString(
+                    "fa-IR"
+                )}
+
+                تومان
+
+                <br><br>
+
+                🕐 وضعیت:
+
+                در انتظار پرداخت
+
+                <br><br>
+
+                💳 سیستم پرداخت به‌زودی فعال می‌شود.
+
+            `;
+
+        }
+
+
+
+        // =========================
+        // SECURITY
+        // =========================
+
+        function escapeHtml(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+
+        // =========================
+        // INITIAL PRICE
+        // =========================
+
+        calculatePrice();
+
+    </script>
+
+
+</body>
+
+</html>

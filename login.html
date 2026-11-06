@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ورود | ParClicker</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0b0f19;
+            color: white;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 34px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9ca3af;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 18px;
+            padding: 30px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d1d5db;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+
+            border-radius: 10px;
+            border: 1px solid #374151;
+
+            background: #0b1220;
+            color: white;
+
+            margin-bottom: 18px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #6366f1;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #6366f1;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4f46e5;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 18px;
+            min-height: 22px;
+        }
+
+        .signup {
+            text-align: center;
+            margin-top: 22px;
+            color: #9ca3af;
+        }
+
+        .signup a {
+            color: #818cf8;
+            text-decoration: none;
+        }
+
+        .signup a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            ParClicker
+        </div>
+
+        <div class="subtitle">
+            ورود به حساب کاربری
+        </div>
+
+        <div class="box">
+
+            <h1>🔐 ورود</h1>
+
+            <form id="loginForm">
+
+                <label for="username">
+                    نام کاربری
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="نام کاربری خود را وارد کنید"
+                    required
+                >
+
+                <label for="password">
+                    رمز عبور
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="رمز عبور خود را وارد کنید"
+                    required
+                >
+
+                <button type="submit">
+                    ورود
+                </button>
+
+            </form>
+
+            <div id="message"></div>
+
+            <div class="signup">
+                حساب کاربری ندارید؟
+                <a href="/signup-page">
+                    ثبت‌نام کنید
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const form = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username").value;
+
+            const password =
+                document.getElementById("password").value;
+
+            message.textContent = "در حال ورود...";
+
+            try {
+
+                const response = await fetch("/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    }),
+
+                    credentials: "include"
+
+                });
+
+
+                if (response.redirected) {
+
+                    window.location.href = response.url;
+
+                    return;
+                }
+
+
+                const data = await response.json();
+
+
+                if (data.success) {
+
+                    message.style.color = "#22c55e";
+
+                    message.textContent =
+                        "ورود موفق بود. در حال انتقال...";
+
+                    setTimeout(function() {
+
+                        window.location.href = "/";
+
+                    }, 500);
+
+                } else {
+
+                    message.style.color = "#ef4444";
+
+                    message.textContent =
+                        data.message;
+
+                }
+
+            } catch (error) {
+
+                message.style.color = "#ef4444";
+
+                message.textContent =
+                    "خطا در اتصال به سرور";
+
+                console.error(error);
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
