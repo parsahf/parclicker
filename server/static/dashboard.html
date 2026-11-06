@@ -1,0 +1,1078 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>داشبورد | ParClicker</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #151515
+                );
+
+            color: white;
+
+            min-height: 100vh;
+        }
+
+
+        header {
+
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: #0d0d0d;
+
+            border-bottom:
+                1px solid #292929;
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: white;
+        }
+
+
+        .logo span {
+
+            color: #777;
+        }
+
+
+        .back {
+
+            text-decoration: none;
+
+            color: #ddd;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background: #1b1b1b;
+
+            transition: 0.2s;
+        }
+
+
+        .back:hover {
+
+            background: #292929;
+
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 50px auto;
+
+        }
+
+
+        .title {
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .title h1 {
+
+            margin: 0 0 10px;
+
+            font-size: 34px;
+        }
+
+
+        .title p {
+
+            margin: 0;
+
+            color: #aaa;
+
+            font-size: 16px;
+        }
+
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(260px, 1fr)
+                );
+
+            gap: 22px;
+        }
+
+
+        .card {
+
+            background: #111;
+
+            border:
+                1px solid #292929;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .card h2 {
+
+            margin-top: 0;
+
+            margin-bottom: 25px;
+
+            font-size: 20px;
+        }
+
+
+        .row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 14px 0;
+
+            border-bottom:
+                1px solid #242424;
+        }
+
+
+        .row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .label {
+
+            color: #999;
+
+        }
+
+
+        .value {
+
+            font-weight: bold;
+
+            text-align: left;
+
+            direction: ltr;
+
+        }
+
+
+        .active {
+
+            color: #4ade80;
+
+        }
+
+
+        .expired {
+
+            color: #f87171;
+
+        }
+
+
+        .no-subscription {
+
+            color: #aaa;
+
+        }
+
+
+        .cps {
+
+            font-size: 32px;
+
+            color: white;
+
+        }
+
+
+        .price {
+
+            color: #facc15;
+
+        }
+
+
+        .license {
+
+            font-family: monospace;
+
+            font-size: 14px;
+
+        }
+
+
+        .orders {
+
+            margin-top: 22px;
+
+        }
+
+
+        .order {
+
+            background: #171717;
+
+            border:
+                1px solid #292929;
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .order:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .order-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .order-number {
+
+            font-weight: bold;
+
+            font-size: 17px;
+        }
+
+
+        .pending {
+
+            color: #facc15;
+        }
+
+
+        .paid {
+
+            color: #4ade80;
+        }
+
+
+        .cancelled {
+
+            color: #f87171;
+        }
+
+
+        .order-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 8px 0;
+
+            color: #ccc;
+
+            border-bottom:
+                1px solid #242424;
+        }
+
+
+        .order-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .order-label {
+
+            color: #888;
+
+        }
+
+
+        .no-orders {
+
+            color: #888;
+
+            text-align: center;
+
+            padding: 20px 0;
+
+        }
+
+
+        .buttons {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 30px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .button {
+
+            text-decoration: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            padding: 13px 22px;
+
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            color: white;
+
+            background: #242424;
+
+            transition: 0.2s;
+        }
+
+
+        .button:hover {
+
+            background: #333;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .primary {
+
+            background: #ffffff;
+
+            color: #000;
+
+            font-weight: bold;
+        }
+
+
+        .primary:hover {
+
+            background: #ddd;
+
+        }
+
+
+        footer {
+
+            text-align: center;
+
+            color: #666;
+
+            padding: 40px 0 25px;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            header {
+
+                padding: 0 5%;
+
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                margin-top: 35px;
+
+            }
+
+
+            .title h1 {
+
+                font-size: 28px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        ParClicker
+    </div>
+
+
+    <a
+        class="back"
+        href="/"
+    >
+        ← صفحه اصلی
+    </a>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <div class="title">
+
+        <h1>
+            👤 داشبورد
+        </h1>
+
+        <p id="welcome">
+            در حال دریافت اطلاعات...
+        </p>
+
+    </div>
+
+
+
+    <div class="grid">
+
+
+        <!-- Account -->
+
+        <div class="card">
+
+            <h2>
+                👤 حساب کاربری
+            </h2>
+
+
+            <div class="row">
+
+                <span class="label">
+                    نام کاربری
+                </span>
+
+                <span
+                    class="value"
+                    id="username"
+                >
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Subscription -->
+
+        <div class="card">
+
+            <h2>
+                🔑 اشتراک
+            </h2>
+
+
+            <div class="row">
+
+                <span class="label">
+                    وضعیت
+                </span>
+
+                <span
+                    class="value"
+                    id="status"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    مدت اشتراک
+                </span>
+
+                <span
+                    class="value"
+                    id="months"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    تاریخ انقضا
+                </span>
+
+                <span
+                    class="value"
+                    id="expires"
+                >
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- License -->
+
+        <div class="card">
+
+            <h2>
+                🔐 لایسنس
+            </h2>
+
+
+            <div class="row">
+
+                <span class="label">
+                    کلید لایسنس
+                </span>
+
+                <span
+                    class="value license"
+                    id="license"
+                >
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CPS -->
+
+        <div class="card">
+
+            <h2>
+                🖱️ سرعت کلیک
+            </h2>
+
+
+            <div class="row">
+
+                <span class="label">
+                    سرعت خریداری‌شده
+                </span>
+
+                <span
+                    class="value cps"
+                    id="cps"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    قیمت اشتراک
+                </span>
+
+                <span
+                    class="value price"
+                    id="price"
+                >
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Orders -->
+
+        <div class="card orders">
+
+            <h2>
+                🧾 سفارش‌های من
+            </h2>
+
+            <div id="ordersList">
+
+                <div class="no-orders">
+                    در حال دریافت سفارش‌ها...
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="buttons">
+
+        <a
+            href="/"
+            class="button primary"
+        >
+            💰 خرید اشتراک
+        </a>
+
+
+        <a
+            href="/logout"
+            class="button"
+        >
+            🚪 خروج
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<footer>
+
+    ParClicker © 2026
+
+</footer>
+
+
+
+<script>
+
+async function loadDashboard() {
+
+    try {
+
+        const response = await fetch(
+            "/api/dashboard",
+            {
+                credentials: "include"
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!data.logged_in) {
+
+            window.location.href =
+                "/login-page";
+
+            return;
+        }
+
+
+        // Username
+
+        document.getElementById(
+            "username"
+        ).textContent =
+            data.username;
+
+
+        document.getElementById(
+            "welcome"
+        ).textContent =
+            "خوش آمدید " + data.username;
+
+
+
+        // Subscription
+
+        const subscription =
+            data.subscription;
+
+
+        if (subscription) {
+
+            document.getElementById(
+                "status"
+            ).textContent =
+                subscription.expired
+                    ? "منقضی شده"
+                    : "فعال";
+
+
+            document.getElementById(
+                "status"
+            ).className =
+                subscription.expired
+                    ? "value expired"
+                    : "value active";
+
+
+            document.getElementById(
+                "months"
+            ).textContent =
+                subscription.months +
+                " ماه";
+
+
+            document.getElementById(
+                "expires"
+            ).textContent =
+                new Date(
+                    subscription.expires_at
+                ).toLocaleDateString(
+                    "fa-IR"
+                );
+
+
+            document.getElementById(
+                "license"
+            ).textContent =
+                subscription.license_key;
+
+
+            document.getElementById(
+                "cps"
+            ).textContent =
+                subscription.cps +
+                " CPS";
+
+
+            document.getElementById(
+                "price"
+            ).textContent =
+                Number(
+                    subscription.price
+                ).toLocaleString(
+                    "fa-IR"
+                ) +
+                " تومان";
+
+        } else {
+
+            document.getElementById(
+                "status"
+            ).textContent =
+                "بدون اشتراک";
+
+
+            document.getElementById(
+                "status"
+            ).className =
+                "value no-subscription";
+
+
+            document.getElementById(
+                "months"
+            ).textContent =
+                "-";
+
+
+            document.getElementById(
+                "expires"
+            ).textContent =
+                "-";
+
+
+            document.getElementById(
+                "license"
+            ).textContent =
+                "هنوز لایسنسی ندارید";
+
+
+            document.getElementById(
+                "cps"
+            ).textContent =
+                "هنوز خریداری نشده";
+
+
+            document.getElementById(
+                "price"
+            ).textContent =
+                "-";
+
+        }
+
+
+        // Orders
+
+        loadOrders();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+
+async function loadOrders() {
+
+    const ordersList =
+        document.getElementById(
+            "ordersList"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/orders",
+                {
+                    credentials: "include"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            ordersList.innerHTML =
+                '<div class="no-orders">خطا در دریافت سفارش‌ها</div>';
+
+            return;
+        }
+
+
+        if (
+            !data.orders ||
+            data.orders.length === 0
+        ) {
+
+            ordersList.innerHTML =
+                '<div class="no-orders">هنوز سفارشی ثبت نکرده‌اید.</div>';
+
+            return;
+        }
+
+
+        ordersList.innerHTML =
+            data.orders.map(
+                order => {
+
+                    let statusText =
+                        "در انتظار پرداخت";
+
+                    let statusClass =
+                        "pending";
+
+
+                    if (
+                        order.status ===
+                        "paid"
+                    ) {
+
+                        statusText =
+                            "پرداخت شده";
+
+                        statusClass =
+                            "paid";
+
+                    }
+
+
+                    if (
+                        order.status ===
+                        "cancelled"
+                    ) {
+
+                        statusText =
+                            "لغو شده";
+
+                        statusClass =
+                            "cancelled";
+
+                    }
+
+
+                    return `
+                        <div class="order">
+
+                            <div class="order-header">
+
+                                <div class="order-number">
+                                    سفارش #${order.id}
+                                </div>
+
+                                <div class="${statusClass}">
+                                    ${statusText}
+                                </div>
+
+                            </div>
+
+
+                            <div class="order-row">
+
+                                <span class="order-label">
+                                    ID نرم‌افزار
+                                </span>
+
+                                <span>
+                                    ${order.software_id}
+                                </span>
+
+                            </div>
+
+
+                            <div class="order-row">
+
+                                <span class="order-label">
+                                    سرعت
+                                </span>
+
+                                <span>
+                                    ${order.cps} CPS
+                                </span>
+
+                            </div>
+
+
+                            <div class="order-row">
+
+                                <span class="order-label">
+                                    مدت
+                                </span>
+
+                                <span>
+                                    ${order.months} ماه
+                                </span>
+
+                            </div>
+
+
+                            <div class="order-row">
+
+                                <span class="order-label">
+                                    مبلغ
+                                </span>
+
+                                <span>
+                                    ${Number(
+                                        order.price
+                                    ).toLocaleString(
+                                        "fa-IR"
+                                    )} تومان
+                                </span>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }
+            ).join("");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        ordersList.innerHTML =
+            '<div class="no-orders">خطا در ارتباط با سرور</div>';
+
+    }
+
+}
+
+
+loadDashboard();
+
+</script>
+
+
+</body>
+
+</html>
+```
